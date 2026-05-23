@@ -54,7 +54,8 @@
 
 <script setup>
 import { ref, nextTick, onMounted, onUnmounted } from 'vue'
-import Vapi from '@vapi-ai/web'
+import VapiModule from '@vapi-ai/web'
+const Vapi = VapiModule.Vapi ?? VapiModule.default ?? VapiModule
 import { useRouter } from 'vue-router'
 import Loading from '@/assets/loading.svg'
 
@@ -102,7 +103,7 @@ const selectRole = async (role) => {
     loading.value = true
     selectedRole.value = role
 
-    const res = await fetch('http://localhost:8000/api/v1/vapi/get-assistant', {
+    const res = await fetch('https://lifeskillapp.onrender.com/api/v1/vapi/get-assistant', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ role })
